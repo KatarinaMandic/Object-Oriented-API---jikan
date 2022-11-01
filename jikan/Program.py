@@ -1,3 +1,4 @@
+from secrets import choice
 from jikan.Anime import Anime
 import sys
 
@@ -6,7 +7,7 @@ class Program:
 
     @staticmethod
     def main_menu():
-        menu =  '[1] Show daily anime' + \
+        menu =  '[1] Show daily anime\n' + \
             '[Q] Exit application'
         print(menu)
 
@@ -25,3 +26,9 @@ class Program:
         daily_list = daily_amime.values()
         for item in daily_list:
             print(item.short_info())
+        print('-----------')
+        print('Enter ID for details or "N" for menu.')
+        choice = Program.user_choice()
+        if not choice == 'N':
+            choice = int(choice)
+            print(daily_amime[choice].long_info())
