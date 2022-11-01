@@ -1,3 +1,4 @@
 from jikan.Anime import Anime
 
-Anime.daily_shows()
+daily_shows = Anime.daily_shows()
+print(daily_shows[41467].long_info())
