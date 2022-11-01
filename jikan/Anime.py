@@ -1,4 +1,5 @@
 from multiprocessing import current_process
+from urllib import response
 import arrow
 import requests
 import ujson
@@ -12,4 +13,7 @@ class Anime:
     @staticmethod
     def daily_shows():
         current = arrow.now()
-        print(current)
+        today = current.format('dddd').lower()
+        r = requests.get(f'https://api.jikan.moe/v4/schedules/{today}')
+        response = ujson.loads(r.text)
+        print(response)
