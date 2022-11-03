@@ -1,4 +1,5 @@
 from secrets import choice
+from unittest import result
 from jikan.Anime import Anime
 import sys
 
@@ -8,6 +9,7 @@ class Program:
     @staticmethod
     def main_menu():
         menu =  '[1] Show daily anime\n' + \
+            '[2] Search anime for phrase\n' + \
             '[Q] Exit application'
         print(menu)
 
@@ -32,3 +34,11 @@ class Program:
         if not choice == 'N':
             choice = int(choice)
             print(daily_amime[choice].long_info())
+
+    @staticmethod
+    def search_anime_for_phrase():
+        phrase = input('Enter search phrase: ')
+        results = Anime.search_anime_by_phrase(phrase)
+        results = results.values()
+        for anime in results:
+            print(anime.short_info())

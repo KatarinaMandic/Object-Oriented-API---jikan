@@ -56,3 +56,15 @@ class Anime:
         for record in response:
             daily_anime[record['mal_id']] = Anime(record['mal_id'], record['title'], record['score'])
         return daily_anime
+
+    @staticmethod
+    def search_anime_by_phrase(phrase):
+        r = requests.get(f'https://api.jikan.moe/v4/anime?q={phrase}')
+        response = ujson.loads(r.text)
+        response = response['data']
+        daily_anime = {}
+
+        for record in response:
+            daily_anime[record['mal_id']] = Anime(record['mal_id'], record['title'], record['score'])
+        return daily_anime
+        

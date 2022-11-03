@@ -7,3 +7,5 @@ while True:
         Program.exit()
     if choice == '1':
         Program.show_daily_anime()
+    if choice == '2':
+        Program.search_anime_for_phrase()
