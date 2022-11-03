@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 from jikan.Anime import Anime
+from jikan.simplegui_windows import details_window
 
 sg.theme('DarkBlue14')
 
@@ -25,6 +26,12 @@ while True:
         daily_anime = Anime.daily_shows()
         daily_anime = daily_anime.values()
         window['_RESULTS_'].Update(values=daily_anime)
+    if event == 'Show Details':
+        indexes = window['_RESULTS_'].get_indexes()
+        i = indexes[0]
+        all_anime = window['_RESULTS_'].get_list_values()
+        all_anime = list(all_anime)
+        window_detail = details_window(all_anime[i])
 
 
 window.close()

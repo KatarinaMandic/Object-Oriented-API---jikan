@@ -18,6 +18,7 @@ class Anime:
         self.episodes = 0
         self.synopsis = ''
         self.airing = ''
+        self.image_url = ''
 
     def short_info(self):
         return f'[{self.mal_id}] {self.title} - {self.score}'
@@ -33,6 +34,7 @@ class Anime:
         self.episodes = response['episodes']
         self.synopsis = response['synopsis']
         self.airing = response['aired']['string']
+        self.image_url = response['images']['jpg']['image_url']
 
     def long_info(self):
         self.details()

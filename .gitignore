@@ -1,2 +1,6 @@
 #Auto generated directory
 jikan/__pycache__/*
+
+#Images
+*.jpg
+*.png
