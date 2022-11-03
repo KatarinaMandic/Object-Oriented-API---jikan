@@ -44,7 +44,11 @@ class Anime:
                         f'Airing: {self.airing}\n' + \
                             f'Synopsis: {self.synopsis}'
 
+    def __str__(self) -> str:
+        return f'[{self.mal_id}] {self.title} - {self.score}'
+    
     #static methods
+
     @staticmethod
     def get_request_results(req_string):
         r = requests.get(req_string)
