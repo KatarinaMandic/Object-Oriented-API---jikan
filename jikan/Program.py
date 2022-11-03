@@ -1,6 +1,7 @@
 from secrets import choice
 from unittest import result
 from jikan.Anime import Anime
+from jikan.Genre import Genre
 import sys
 
 class Program:
@@ -42,3 +43,9 @@ class Program:
         results = results.values()
         for anime in results:
             print(anime.short_info())
+
+    def get_genre_id():
+        genre_id = Genre.get_genre_id()
+        genre_id = genre_id.values()
+        for genre in genre_id:
+            print(genre)
