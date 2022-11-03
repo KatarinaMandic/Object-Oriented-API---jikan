@@ -1,4 +1,5 @@
 from multiprocessing import current_process
+import stat
 from urllib import response
 import arrow
 import requests
@@ -45,26 +46,27 @@ class Anime:
 
     #static methods
     @staticmethod
+    def get_request_results(req_string):
+        r = requests.get(req_string)
+        response = ujson.loads(r.text)
+        response = response['data']
+        results = {}
+
+        for record in response:
+            results[record['mal_id']] = Anime(record['mal_id'], record['title'], record['score'])
+        return results
+
+
+    @staticmethod
     def daily_shows():
         current = arrow.now()
         today = current.format('dddd').lower()
-        r = requests.get(f'https://api.jikan.moe/v4/schedules/{today}')
-        response = ujson.loads(r.text)
-        response = response['data']
-        daily_anime = {}
-
-        for record in response:
-            daily_anime[record['mal_id']] = Anime(record['mal_id'], record['title'], record['score'])
-        return daily_anime
+        return Anime.get_request_results(f'https://api.jikan.moe/v4/schedules/{today}')
 
     @staticmethod
     def search_anime_by_phrase(phrase):
-        r = requests.get(f'https://api.jikan.moe/v4/anime?q={phrase}')
-        response = ujson.loads(r.text)
-        response = response['data']
-        daily_anime = {}
+        return Anime.get_request_results(f'https://api.jikan.moe/v4/anime?q={phrase}')
 
-        for record in response:
-            daily_anime[record['mal_id']] = Anime(record['mal_id'], record['title'], record['score'])
-        return daily_anime
-        
+    @staticmethod
+    def get_anime_for_season(season, year):
+        return Anime.get_request_results(f'https://api.jikan.moe/v4/seasons/{year}/{season}')
